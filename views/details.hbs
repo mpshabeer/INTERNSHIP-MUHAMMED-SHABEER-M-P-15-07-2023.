@@ -1,0 +1,30 @@
+<table border="1" style="width: auto; padding: 15px;">
+  <tr>
+    <th>Name:</th>
+    <th>Rollno</th>
+    <th>Mobile No</th>
+    <th>Class ID</th>
+    <th>Standard</th>
+    <th>Division</th>
+    <th>Actions</th>
+  </tr>
+
+  {{#each students}}
+    <tr>
+      <td>{{name}}</td>
+      <td>{{rollno}}</td>
+      <td>{{mobile}}</td>
+      <td>{{clsid}}</td>
+      {{#with (lookup divisions clsid)}}
+        <td>{{this.std}}</td>
+        <td>{{this.division}}</td>
+      {{/with}}
+      <td>
+        <form method="POST" action="/delete">
+          <input type="hidden" name="studentId" value="{{_id}}">
+          <button type="submit">Delete</button>
+        </form>
+      </td>
+    </tr>
+  {{/each}}
+</table>
